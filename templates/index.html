@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin: 0 10px;
+        }
+        p {
+            color: #666;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="password"],
+        input[type="text"],
+        input[type="date"],
+        input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+            max-width: calc(100% - 20px);
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        p.error {
+            color: red;
+        }
+        p.success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, {{user['username']}}</h1>
+    <a href="/logout">Log Out</a>
+    <a href="/mytasks">My tasks</a>
+    <p>Reset Password</p>
+    <form action="/resetpass" method="post">
+        <input type="password" placeholder="Old Password" name="old">
+        <br>
+        <input type="password" placeholder="New Password" name="new">
+        <br>
+        <input type="submit" value="Reset Password">
+    </form>
+    <br>
+    <p>New Task</p>
+    <form action="/newtask" method="post">
+        <input type="text" name="label" placeholder="Label">
+        <br>
+        <input type="text" name="description" placeholder="Description">
+        <br>
+        <input type="date" name="due_date">
+        <br>
+        <input type="submit" value="New Task">
+    </form>
+    <p class="error">{{error}}</p>
+    <p class="success">{{success}}</p>
+</body>
+</html>

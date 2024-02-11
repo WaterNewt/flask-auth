@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .task {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .task p {
+            margin: 0;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: greenyellow;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .button:hover {
+            text-decoration: none;
+            background-color: #5fa8f6;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Home</a>
+    <br>
+    <br>
+    {% if task %}
+    <div class="task">
+        <p>Label: {{task['label']}}</p>
+        <p>Description: {{task['description']}}</p>
+        {% if task['completed'] %}
+        <p class="success">Completed</p>
+        <a class="button" href="/togglecompletion?id={{task['id']}}">Uncomplete Task</a>
+        {%else%}
+        <p class="error">Not Completed</p>
+        <a class="button" href="/togglecompletion?id={{task['id']}}">Complete Task</a>
+        {%endif%}
+    </div>
+    {% else %}
+    {%if tasks%}
+    {% for i in tasks %}
+    <div class="task">
+        <a href="/mytasks?id={{i['id']}}">{{i['label']}}</a>
+    </div>
+    {% endfor %}
+    {%else%}
+    <p>You have no tasks</p>
+    {%endif%}
+    {% endif %}
+    <p class="error">{{error}}</p>
+</body>
+</html>
